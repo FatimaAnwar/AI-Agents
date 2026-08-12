@@ -1,4 +1,5 @@
-This structure itself follows SRP.
+
+###This structure itself follows SRP.
 
 | Component            | One responsibility  |
 | -------------------- | ------------------- |
@@ -66,7 +67,7 @@ EventBus
           DATABASE                UI UPDATE
 
 
-### EVENT DRIVEN follows
+### EVENT DRIVEN FLOW
 
 ┌─────────────────┐
 │    USER / UI    │
@@ -113,7 +114,6 @@ EventBus
 ┌────────────┐
 │  FRONTEND  │
 └────────────┘
-
 
 
 ### DATABASE
