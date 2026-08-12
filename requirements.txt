@@ -1,0 +1,7 @@
+google-adk
+google-genai
+redis
+fastapi
+uvicorn
+python-dotenv
+pytest
