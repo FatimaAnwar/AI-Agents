@@ -1,12 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Agents</title>
+    <title>AI Cooking Assistant</title>
 </head>
+
 <body>
-    <h1>Welcome to AI-Agents</h1>
-    <p>Your AI-powered agents system</p>
+
+<h1>AI Cooking Assistant</h1>
+
+<input
+    id="question"
+    type="text"
+    placeholder="What would you like to cook?"
+>
+
+<button onclick="askAssistant()">
+    Ask
+</button>
+
+<h2>Recipe</h2>
+<div id="recipe"></div>
+
+<h2>Nutrition</h2>
+<div id="nutrition"></div>
+
+<h2>Grocery List</h2>
+<div id="grocery"></div>
+
+<script>
+
+async function askAssistant() {
+
+    const question =
+        document.getElementById("question").value;
+
+    // Call backend here
+}
+
+</script>
+
 </body>
 </html>

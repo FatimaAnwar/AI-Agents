@@ -1,0 +1,130 @@
+This structure itself follows SRP.
+
+| Component            | One responsibility  |
+| -------------------- | ------------------- |
+| `agent.py`           | Coordinate agents   |
+| `recipe_agent.py`    | Recipes             |
+| `nutrition_agent.py` | Nutrition           |
+| `grocery_agent.py`   | Grocery lists       |
+| `event_bus.py`       | Redis communication |
+| `repository.py`      | Database            |
+| `main.py`            | API                 |
+| `index.html`         | UI                  |
+
+
+                    Root Agent
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+     Recipe          Nutrition       Grocery
+      Agent            Agent           Agent
+
+
+###Events
+
+request.started
+       ↓
+recipe.generated
+       ↓
+nutrition.analyzed
+       ↓
+grocery.created
+       ↓
+request.completed
+
+
+###event_bus
+
+EventBus
+   │
+   └── Redis communication ONLY
+
+
+
+### Complete structure
+
+                         USER
+                          │
+                          ▼
+                    ROOT AGENT
+                          │
+             ┌────────────┼────────────┐
+             ▼            ▼            ▼
+          RECIPE       NUTRITION     GROCERY
+          AGENT          AGENT        AGENT
+             │            │            │
+             ▼            ▼            ▼
+        recipe.       nutrition.    grocery.
+        generated      analyzed      created
+             │            │            │
+             └────────────┼────────────┘
+                          ▼
+                    REDIS PUB/SUB
+                          │
+              ┌───────────┴───────────┐
+              ▼                       ▼
+          DATABASE                UI UPDATE
+
+
+### EVENT DRIVEN follows
+
+┌─────────────────┐
+│    USER / UI    │
+└────────┬────────┘
+         │
+         │ request
+         ▼
+┌────────────────────────┐
+│   ROOT COOKING AGENT   │
+│    Orchestrator only   │
+└───────────┬────────────┘
+            │
+     ┌──────┼───────┐
+     │      │       │
+     ▼      ▼       ▼
+┌────────┐ ┌───────┐ ┌────────┐
+│ Recipe │ │Nutri- │ │Grocery │
+│ Agent  │ │tion   │ │ Agent  │
+│        │ │Agent  │ │        │
+└───┬────┘ └───┬───┘ └───┬────┘
+    │          │          │
+    │ events   │ events   │ events
+    └──────────┼──────────┘
+               ▼
+       ┌────────────────┐
+       │ REDIS PUB/SUB  │
+       │  Event Bus     │
+       └───────┬────────┘
+               │
+       ┌───────┴────────┐
+       ▼                ▼
+┌────────────┐    ┌────────────┐
+│  DATABASE  │    │   UPDATE   │
+│            │    │     UI     │
+└────────────┘    └────────────┘
+       │
+       ▼
+┌────────────┐
+│  BACKEND   │
+│  FastAPI   │
+└────────────┘
+       │
+       ▼
+┌────────────┐
+│  FRONTEND  │
+└────────────┘
+
+
+
+### DATABASE
+
+CookingRepository
+       │
+       ├── Recipes
+       │
+       ├── Nutrition
+       │
+       └── Grocery Lists
+
+
+

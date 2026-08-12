@@ -1,8 +1,13 @@
-# Backend main application
 from fastapi import FastAPI
 
-app = FastAPI()
+
+app = FastAPI(
+    title="AI Cooking Assistant"
+)
+
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to AI-Agents API"}
+def home():
+    return {
+        "message": "AI Cooking Assistant is running"
+    }

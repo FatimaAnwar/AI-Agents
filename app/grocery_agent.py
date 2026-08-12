@@ -1,16 +1,21 @@
-# Grocery agent module
 from google.adk.agents import Agent
+
 
 grocery_agent = Agent(
     name="grocery_agent",
-    model="gemini-3.6-flash",
+    model="gemini-3.1-flash-lite",
     instruction="""
-    You are a Grocery Agent.
+    You are the Grocery Agent.
 
-    Your job is to:
-    - Extract ingredients from recipes.
-    - Create grocery lists.
-    - Group ingredients by category.
-    - Suggest ingredient substitutions.
+    Your ONLY responsibility is grocery management.
+
+    You can:
+    - extract ingredients
+    - create grocery lists
+    - group ingredients by category
+    - remove duplicate ingredients
+    - suggest ingredient substitutions
+
+    Do not perform nutrition analysis.
     """
 )
